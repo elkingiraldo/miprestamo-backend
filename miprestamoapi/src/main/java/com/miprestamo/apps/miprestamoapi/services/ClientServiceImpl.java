@@ -19,27 +19,26 @@ public class ClientServiceImpl implements IClientService {
 	@Autowired
 	private ClientConverterService clientConverterService;
 
-	public ClientDTO getClientById(final String id) {
-		final Optional<Client> optionalClient = clientRepository.findById(id);
-		if (optionalClient.isPresent()) {
-			return clientConverterService.toDTO(optionalClient.get());
-		}
-
-		return null;
-	}
-
 	@Override
 	public List<ClientDTO> getAllClients() {
-		List<Client> clientList = clientRepository.findAll();
+		final List<Client> clientList = clientRepository.findAll();
 		return clientConverterService.toDtos(clientList);
 	}
 
 	@Override
-	public ClientDTO create(ClientDTO client) {
-//		clientRepository.save();
+	public ClientDTO getClientById(final int id) {
+		final Optional<Client> optionalClient = clientRepository.findById(id);
+		if (optionalClient.isPresent()) {
+			return clientConverterService.toDTO(optionalClient.get());
+		}
+		// TODO
 		return null;
 	}
 
-	
+	@Override
+	public ClientDTO create(final ClientDTO client) {
+//		clientRepository.save();
+		return null;
+	}
 
 }
