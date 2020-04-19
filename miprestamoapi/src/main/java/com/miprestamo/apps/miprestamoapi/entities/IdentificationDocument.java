@@ -8,6 +8,7 @@ public class IdentificationDocument {
 
 	@Id
 	private String id;
+
 	private String type;
 	private String prefix;
 

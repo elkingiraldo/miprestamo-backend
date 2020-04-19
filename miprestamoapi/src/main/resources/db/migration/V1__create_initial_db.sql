@@ -16,6 +16,12 @@ CREATE TABLE client (
     phone VARCHAR(20) NOT NULL
 );
 
+CREATE TABLE document_details (
+	id SERIAL PRIMARY KEY,
+	document_number VARCHAR(20) NOT NULL,
+    document_type VARCHAR(50) NOT NULL
+);
+
 INSERT INTO identification_document (id, type, prefix) VALUES ('TD-001', 'CEDULA DE CIUDADANIA', 'CC');
 INSERT INTO identification_document (id, type, prefix) VALUES ('TD-002', 'CEDULA DE EXTRANGERIA', 'CE');
 INSERT INTO identification_document (id, type, prefix) VALUES ('TD-003', 'PASAPORTE', 'PP');
@@ -28,12 +34,12 @@ VALUES (2, '{3}', 'Martha', 'Jeannet', 'Pinedo', 'Chaves', 'mpinedoc', 'Calle 16
 INSERT INTO client (id, document_list, first_name, second_name, fisrt_last_name, second_last_name, business_name, address, phone)
 VALUES (3, '{4,5,6}', 'Jairo', '', 'Giraldo', 'Jimenez', 'jgiraldoj', 'Calle 160 # 72 - 51', '3162532151');
 
-
-
-
-
-
-
+INSERT INTO document_details (id, document_number, document_type) VALUES (1, '11111', 'TD-001');
+INSERT INTO document_details (id, document_number, document_type) VALUES (2, '22222', 'TD-004');
+INSERT INTO document_details (id, document_number, document_type) VALUES (3, '33333', 'TD-001');
+INSERT INTO document_details (id, document_number, document_type) VALUES (4, '44444', 'TD-001');
+INSERT INTO document_details (id, document_number, document_type) VALUES (5, '55555', 'TD-002');
+INSERT INTO document_details (id, document_number, document_type) VALUES (6, '66666', 'TD-003');
 
 
 
