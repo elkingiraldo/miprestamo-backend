@@ -1,14 +1,13 @@
 package com.miprestamo.apps.miprestamoapi.dtos;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 
 public class ClientDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;
-	private List<Integer> documentList;
 	private String firstName;
 	private String secondName;
 	private String fisrtLastName;
@@ -16,6 +15,7 @@ public class ClientDTO implements Serializable {
 	private String businessName;
 	private String address;
 	private String phone;
+	private Set<DocumentDetailsDTO> documentDetails;
 
 	public Integer getId() {
 		return id;
@@ -23,14 +23,6 @@ public class ClientDTO implements Serializable {
 
 	public void setId(final Integer id) {
 		this.id = id;
-	}
-
-	public List<Integer> getDocumentList() {
-		return documentList;
-	}
-
-	public void setDocumentList(final List<Integer> documentList) {
-		this.documentList = documentList;
 	}
 
 	public String getFirstName() {
@@ -87,6 +79,21 @@ public class ClientDTO implements Serializable {
 
 	public void setPhone(final String phone) {
 		this.phone = phone;
+	}
+
+	public Set<DocumentDetailsDTO> getDocumentDetails() {
+		return documentDetails;
+	}
+
+	public void setDocumentDetails(final Set<DocumentDetailsDTO> documentDetails) {
+		this.documentDetails = documentDetails;
+	}
+
+	@Override
+	public String toString() {
+		return "ClientDTO [id=" + id + ", documentDetails=" + documentDetails + ", firstName=" + firstName
+				+ ", secondName=" + secondName + ", fisrtLastName=" + fisrtLastName + ", secondLastName="
+				+ secondLastName + ", businessName=" + businessName + ", address=" + address + ", phone=" + phone + "]";
 	}
 
 }

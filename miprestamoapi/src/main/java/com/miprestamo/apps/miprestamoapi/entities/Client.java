@@ -1,27 +1,22 @@
 package com.miprestamo.apps.miprestamoapi.entities;
 
-import java.util.List;
+import java.io.Serializable;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-import org.hibernate.annotations.Type;
-import org.hibernate.annotations.TypeDef;
-
-import com.vladmihalcea.hibernate.type.array.ListArrayType;
+import javax.persistence.OneToMany;
 
 @Entity
-@TypeDef(name = "list-array", typeClass = ListArrayType.class)
-public class Client {
+public class Client implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-
-	@Type(type = "list-array")
-	private List<Integer> documentList;
 
 	private String firstName;
 	private String secondName;
@@ -31,20 +26,15 @@ public class Client {
 	private String address;
 	private String phone;
 
+	@OneToMany(mappedBy = "client")
+	private Set<DocumentDetails> documentDetails;
+
 	public Integer getId() {
 		return id;
 	}
 
 	public void setId(final Integer id) {
 		this.id = id;
-	}
-
-	public List<Integer> getDocumentList() {
-		return documentList;
-	}
-
-	public void setDocumentList(final List<Integer> documentList) {
-		this.documentList = documentList;
 	}
 
 	public String getFirstName() {
@@ -103,11 +93,19 @@ public class Client {
 		this.phone = phone;
 	}
 
+	public Set<DocumentDetails> getDocumentDetails() {
+		return documentDetails;
+	}
+
+	public void setDocumentDetails(final Set<DocumentDetails> documentDetails) {
+		this.documentDetails = documentDetails;
+	}
+
 	@Override
 	public String toString() {
-		return "Client [id=" + id + ", documentList=" + documentList + ", firstName=" + firstName + ", secondName="
-				+ secondName + ", fisrtLastName=" + fisrtLastName + ", secondLastName=" + secondLastName
-				+ ", businessName=" + businessName + ", address=" + address + ", phone=" + phone + "]";
+		return "Client [id=" + id + ", documentDetails=" + documentDetails + ", firstName=" + firstName
+				+ ", secondName=" + secondName + ", fisrtLastName=" + fisrtLastName + ", secondLastName="
+				+ secondLastName + ", businessName=" + businessName + ", address=" + address + ", phone=" + phone + "]";
 	}
 
 }

@@ -9,5 +9,7 @@ public interface IClientService {
 	public List<ClientDTO> getAllClients();
 
 	public ClientDTO getClientById(String id);
+	
+	public ClientDTO create(ClientDTO client);
 
 }

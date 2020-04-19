@@ -34,4 +34,9 @@ public class IdentificationDocumentDTO implements Serializable {
 		this.prefix = prefix;
 	}
 
+	@Override
+	public String toString() {
+		return "IdentificationDocumentDTO [id=" + id + ", type=" + type + ", prefix=" + prefix + "]";
+	}
+
 }

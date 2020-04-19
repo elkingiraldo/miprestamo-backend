@@ -34,4 +34,12 @@ public class ClientServiceImpl implements IClientService {
 		return clientConverterService.toDtos(clientList);
 	}
 
+	@Override
+	public ClientDTO create(ClientDTO client) {
+//		clientRepository.save();
+		return null;
+	}
+
+	
+
 }
