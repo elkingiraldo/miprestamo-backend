@@ -12,6 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.miprestamo.apps.miprestamoapi.dtos.IdentificationDocumentDTO;
 import com.miprestamo.apps.miprestamoapi.services.IDServiceImpl;
 
+/**
+ * Rest controller for getting current IDs that Mi Prestamo has set
+ * 
+ * @author egiraldo
+ *
+ */
 @RestController
 @RequestMapping("/api/v1.0/ids")
 public class IDController {
@@ -19,6 +25,12 @@ public class IDController {
 	@Autowired
 	private IDServiceImpl idService;
 
+	/**
+	 * This method takes GET API request for handling and passing it to correct
+	 * service application layer.
+	 * 
+	 * @return {@link List<IdentificationDocumentDTO>}, a list of IDs found.
+	 */
 	@GetMapping
 	public ResponseEntity<List<IdentificationDocumentDTO>> getDocumentsType() {
 		final List<IdentificationDocumentDTO> allIDs = idService.retrieveAllDocumentsType();

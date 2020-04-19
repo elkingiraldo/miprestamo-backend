@@ -2,6 +2,12 @@ package com.miprestamo.apps.miprestamoapi.dtos;
 
 import java.io.Serializable;
 
+/**
+ * Document Details DTO provided to the API
+ * 
+ * @author egiraldo
+ *
+ */
 public class DocumentDetailsDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;

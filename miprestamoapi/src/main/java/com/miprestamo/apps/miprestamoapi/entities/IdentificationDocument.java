@@ -7,6 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+/**
+ * Entity for representing DB information related to identification documents
+ * 
+ * @author egiraldo
+ *
+ */
 @Entity
 public class IdentificationDocument implements Serializable {
 
@@ -17,7 +23,7 @@ public class IdentificationDocument implements Serializable {
 
 	private String type;
 	private String prefix;
-	
+
 	@OneToMany(mappedBy = "identificationDocument")
 	private Set<DocumentDetails> documentDetails;
 

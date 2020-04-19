@@ -9,6 +9,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+/**
+ * Entity for representing DB information related to client document Details
+ * 
+ * @author egiraldo
+ *
+ */
 @Entity
 public class DocumentDetails implements Serializable {
 
@@ -19,7 +25,7 @@ public class DocumentDetails implements Serializable {
 	private Integer id;
 
 	private String documentNumber;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "client_id")
 	private Client client;

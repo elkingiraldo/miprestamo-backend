@@ -9,6 +9,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+/**
+ * Entity for representing DB information related to client
+ * 
+ * @author egiraldo
+ *
+ */
 @Entity
 public class Client implements Serializable {
 

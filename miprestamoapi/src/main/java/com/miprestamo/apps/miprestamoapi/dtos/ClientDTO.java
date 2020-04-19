@@ -3,6 +3,12 @@ package com.miprestamo.apps.miprestamoapi.dtos;
 import java.io.Serializable;
 import java.util.Set;
 
+/**
+ * Client DTO provided to the API
+ * 
+ * @author egiraldo
+ *
+ */
 public class ClientDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;

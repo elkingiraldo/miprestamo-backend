@@ -11,6 +11,12 @@ import com.miprestamo.apps.miprestamoapi.entities.Client;
 import com.miprestamo.apps.miprestamoapi.repositories.ClientRepository;
 import com.miprestamo.apps.miprestamoapi.services.converters.ClientConverterService;
 
+/**
+ * Service implementation for handling all client services
+ * 
+ * @author egiraldo
+ *
+ */
 @Service
 public class ClientServiceImpl implements IClientService {
 

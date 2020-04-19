@@ -10,6 +10,12 @@ import com.miprestamo.apps.miprestamoapi.entities.IdentificationDocument;
 import com.miprestamo.apps.miprestamoapi.repositories.IDRepository;
 import com.miprestamo.apps.miprestamoapi.services.converters.IDConverterService;
 
+/**
+ * Service implementation for handling all ID services
+ * 
+ * @author egiraldo
+ *
+ */
 @Service
 public class IDServiceImpl implements IIDService {
 

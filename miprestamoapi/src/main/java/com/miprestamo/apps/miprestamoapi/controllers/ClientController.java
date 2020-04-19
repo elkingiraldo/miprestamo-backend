@@ -27,6 +27,12 @@ public class ClientController {
 	@Autowired
 	private ClientServiceImpl clientService;
 
+	/**
+	 * This method takes GET API request for handling and passing it to correct
+	 * service application layer for searching all current clients
+	 * 
+	 * @return {@link List<ClientDTO>}, a list with all clients found
+	 */
 	@GetMapping
 	public ResponseEntity<List<ClientDTO>> getAllClients() {
 
@@ -35,6 +41,13 @@ public class ClientController {
 		return new ResponseEntity<List<ClientDTO>>(listOfClients, HttpStatus.OK);
 	}
 
+	/**
+	 * This method takes POST API request for handling and passing it to correct
+	 * service application layer for creating a new client.
+	 * 
+	 * @param client, client provided in order to create.
+	 * @return {@link ClientDTO}, client saved in DB.
+	 */
 	@PostMapping
 	public ResponseEntity<ClientDTO> post(@RequestBody final ClientDTO client) {
 
