@@ -30,8 +30,8 @@ public class ClientServiceImpl implements IClientService {
 
 	@Override
 	public List<ClientDTO> getAllClients() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Client> clientList = clientRepository.findAll();
+		return clientConverterService.toDtos(clientList);
 	}
 
 }
