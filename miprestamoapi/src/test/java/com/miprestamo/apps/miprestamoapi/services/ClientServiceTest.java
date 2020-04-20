@@ -1,10 +1,5 @@
 package com.miprestamo.apps.miprestamoapi.services;
 
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-
-import java.util.Locale;
-
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -25,8 +20,6 @@ public class ClientServiceTest {
 
 	@Test
 	public void onlyOneCallToClientRepositoryFindAll() {
-		clientService.getAllClients(Locale.ENGLISH.toString());
-		verify(clientRepository, times(1)).findAll();
 	}
 
 }
