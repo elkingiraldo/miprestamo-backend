@@ -35,7 +35,7 @@ public class FlywayDbMigrationTest {
 			assertThat(client.getId()).isNotNull();
 			assertThat(client.getFirstName()).isEqualTo("Elkin");
 			assertThat(client.getSecondName()).isEqualTo("Giovanni");
-			assertThat(client.getFisrtLastName()).isEqualTo("Giraldo");
+			assertThat(client.getFirstLastName()).isEqualTo("Giraldo");
 			assertThat(client.getSecondLastName()).isEqualTo("Pinedo");
 			assertThat(client.getBusinessName()).isEqualTo("egiraldo");
 			assertThat(client.getAddress()).isEqualTo("Calle 160 # 72 - 51");

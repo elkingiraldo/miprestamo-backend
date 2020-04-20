@@ -16,7 +16,7 @@ public class ClientDTO implements Serializable {
 	private Integer id;
 	private String firstName;
 	private String secondName;
-	private String fisrtLastName;
+	private String firstLastName;
 	private String secondLastName;
 	private String businessName;
 	private String address;
@@ -47,12 +47,12 @@ public class ClientDTO implements Serializable {
 		this.secondName = secondName;
 	}
 
-	public String getFisrtLastName() {
-		return fisrtLastName;
+	public String getFirstLastName() {
+		return firstLastName;
 	}
 
-	public void setFisrtLastName(final String fisrtLastName) {
-		this.fisrtLastName = fisrtLastName;
+	public void setFirstLastName(final String firstLastName) {
+		this.firstLastName = firstLastName;
 	}
 
 	public String getSecondLastName() {
@@ -97,9 +97,9 @@ public class ClientDTO implements Serializable {
 
 	@Override
 	public String toString() {
-		return "ClientDTO [id=" + id + ", documentDetails=" + documentDetails + ", firstName=" + firstName
-				+ ", secondName=" + secondName + ", fisrtLastName=" + fisrtLastName + ", secondLastName="
-				+ secondLastName + ", businessName=" + businessName + ", address=" + address + ", phone=" + phone + "]";
+		return "ClientDTO [id=" + id + ", firstName=" + firstName + ", secondName=" + secondName + ", firstLastName="
+				+ firstLastName + ", secondLastName=" + secondLastName + ", businessName=" + businessName + ", address="
+				+ address + ", phone=" + phone + ", documentDetails=" + documentDetails + "]";
 	}
 
 }

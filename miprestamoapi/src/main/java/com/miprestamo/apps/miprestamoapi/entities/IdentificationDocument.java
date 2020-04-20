@@ -24,7 +24,7 @@ public class IdentificationDocument implements Serializable {
 	private String type;
 	private String prefix;
 
-	@OneToMany(mappedBy = "identificationDocument")
+	@OneToMany(mappedBy = "identificationDocumentId")
 	private Set<DocumentDetails> documentDetails;
 
 	public String getId() {

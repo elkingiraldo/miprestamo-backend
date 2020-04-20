@@ -3,6 +3,7 @@ package com.miprestamo.apps.miprestamoapi.entities;
 import java.io.Serializable;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,13 +27,13 @@ public class Client implements Serializable {
 
 	private String firstName;
 	private String secondName;
-	private String fisrtLastName;
+	private String firstLastName;
 	private String secondLastName;
 	private String businessName;
 	private String address;
 	private String phone;
 
-	@OneToMany(mappedBy = "client")
+	@OneToMany(mappedBy = "client" , cascade = CascadeType.MERGE)
 	private Set<DocumentDetails> documentDetails;
 
 	public Integer getId() {
@@ -59,12 +60,12 @@ public class Client implements Serializable {
 		this.secondName = secondName;
 	}
 
-	public String getFisrtLastName() {
-		return fisrtLastName;
+	public String getFirstLastName() {
+		return firstLastName;
 	}
 
-	public void setFisrtLastName(final String fisrtLastName) {
-		this.fisrtLastName = fisrtLastName;
+	public void setFirstLastName(final String firstLastName) {
+		this.firstLastName = firstLastName;
 	}
 
 	public String getSecondLastName() {
@@ -109,9 +110,9 @@ public class Client implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Client [id=" + id + ", documentDetails=" + documentDetails + ", firstName=" + firstName
-				+ ", secondName=" + secondName + ", fisrtLastName=" + fisrtLastName + ", secondLastName="
-				+ secondLastName + ", businessName=" + businessName + ", address=" + address + ", phone=" + phone + "]";
+		return "Client [id=" + id + ", firstName=" + firstName + ", secondName=" + secondName + ", firstLastName="
+				+ firstLastName + ", secondLastName=" + secondLastName + ", businessName=" + businessName + ", address="
+				+ address + ", phone=" + phone + ", documentDetails=" + documentDetails + "]";
 	}
 
 }

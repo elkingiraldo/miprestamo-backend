@@ -49,8 +49,9 @@ public class ClientController {
 		final String requestId = UUID.randomUUID().toString();
 		LOGGER.info("[ClientController][getAllClients][" + requestId + "] Started.");
 
-		final List<ClientDTO> listOfClients = clientService.getAllClients();
+		final List<ClientDTO> listOfClients = clientService.getAllClients(requestId);
 
+		LOGGER.info("[ClientController][getAllClients][" + requestId + "] finished.");
 		return new ResponseEntity<List<ClientDTO>>(listOfClients, HttpStatus.OK);
 	}
 
@@ -61,13 +62,18 @@ public class ClientController {
 	 * @param client, client provided in order to create.
 	 * @param locale, language the client wants to use
 	 * @return {@link ClientDTO}, client saved in DB.
+	 * @throws APIServiceException when something was wrong during the process
 	 */
 	@PostMapping
 	public ResponseEntity<ClientDTO> post(@RequestBody final ClientDTO client,
-			@RequestHeader(value = "locale", required = false) final String locale) {
+			@RequestHeader(value = "locale", required = false) final String locale) throws APIServiceException {
 
-		final ClientDTO newClient = clientService.create(client);
+		final String requestId = UUID.randomUUID().toString();
+		LOGGER.info("[ClientController][post][" + requestId + "] Started.");
 
+		final ClientDTO newClient = clientService.create(client, requestId);
+
+		LOGGER.info("[ClientController][post][" + requestId + "] finished.");
 		return new ResponseEntity<ClientDTO>(newClient, HttpStatus.CREATED);
 	}
 

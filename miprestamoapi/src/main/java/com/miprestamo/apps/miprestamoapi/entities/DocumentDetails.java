@@ -2,6 +2,7 @@ package com.miprestamo.apps.miprestamoapi.entities;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -30,9 +31,9 @@ public class DocumentDetails implements Serializable {
 	@JoinColumn(name = "client_id")
 	private Client client;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.DETACH)
 	@JoinColumn(name = "identification_document_id")
-	private IdentificationDocument identificationDocument;
+	private IdentificationDocument identificationDocumentId;
 
 	public Integer getId() {
 		return id;
@@ -50,12 +51,12 @@ public class DocumentDetails implements Serializable {
 		this.client = client;
 	}
 
-	public IdentificationDocument getIdentificationDocument() {
-		return identificationDocument;
+	public IdentificationDocument getIdentificationDocumentId() {
+		return identificationDocumentId;
 	}
 
-	public void setIdentificationDocument(final IdentificationDocument identificationDocument) {
-		this.identificationDocument = identificationDocument;
+	public void setIdentificationDocumentId(final IdentificationDocument identificationDocumentId) {
+		this.identificationDocumentId = identificationDocumentId;
 	}
 
 	public String getDocumentNumber() {
@@ -68,8 +69,8 @@ public class DocumentDetails implements Serializable {
 
 	@Override
 	public String toString() {
-		return "DocumentDetails [id=" + id + ", client=" + client + ", identificationDocument=" + identificationDocument
-				+ ", documentNumber=" + documentNumber + "]";
+		return "DocumentDetails [id=" + id + ", documentNumber=" + documentNumber + ", client=" + client
+				+ ", identificationDocumentId=" + identificationDocumentId + "]";
 	}
 
 }
