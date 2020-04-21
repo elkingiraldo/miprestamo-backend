@@ -70,8 +70,23 @@ public class ClientServiceImpl implements IClientService {
 		final Client newClientEntity = clientRepository.save(clientConverterService.toEntity(client, requestId));
 
 		final ClientDTO newClientDto = clientConverterService.toDTO(newClientEntity);
-		LOGGER.info("[ClientServiceImpl][create][" + requestId + "] Finished. New client creater with ID: "
+		LOGGER.info("[ClientServiceImpl][create][" + requestId + "] Finished. New client created with ID: "
 				+ newClientEntity.getId());
+		return newClientDto;
+	}
+
+	@Override
+	@Transactional
+	public ClientDTO update(final ClientDTO client, final String requestId) throws APIServiceException {
+		LOGGER.info("[ClientServiceImpl][update][" + requestId + "] Started.");
+
+		clientValidationService.validateUpdate(client, requestId);
+
+		final Client updatedClientEntity = clientRepository.save(clientConverterService.toEntity(client, requestId));
+
+		final ClientDTO newClientDto = clientConverterService.toDTO(updatedClientEntity);
+		LOGGER.info("[ClientServiceImpl][update][" + requestId + "] Finished. client updated with ID: "
+				+ updatedClientEntity.getId());
 		return newClientDto;
 	}
 

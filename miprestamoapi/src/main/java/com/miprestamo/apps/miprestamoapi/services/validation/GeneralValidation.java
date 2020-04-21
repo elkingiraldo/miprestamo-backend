@@ -29,18 +29,29 @@ public class GeneralValidation {
 	 */
 	protected void validateObjectNotNull(final Object obj, final String className) throws APIServiceException {
 		if (Objects.isNull(obj)) {
-			throw new APIServiceException(DTO_NAME.apply(className), APIServiceErrorCodes.GENERAL_DTO_CANT_BE_NULL_EXCEPTION);
+			throw new APIServiceException(DTO_NAME.apply(className),
+					APIServiceErrorCodes.GENERAL_DTO_CANT_BE_NULL_EXCEPTION);
 		}
 	}
 
 	/**
 	 * Validate if an attribute is null or not
 	 * 
-	 * @param atribute
-	 * @param attributeName
+	 * @param atribute,      String to validate
+	 * @param attributeName, String with the name of the attribute
 	 * @throws APIServiceException
 	 */
 	protected void validateAttributeNotNull(final String atribute, final String attributeName)
+			throws APIServiceException {
+		if (Objects.isNull(atribute)) {
+			throw new APIServiceException(attributeName, APIServiceErrorCodes.GENERAL_ATTRIBUTE_REQUIRED_EXCEPTION);
+		}
+	}
+
+	/**
+	 * Validate if an attribute is null or not
+	 */
+	protected void validateAttributeNotNull(final Integer atribute, final String attributeName)
 			throws APIServiceException {
 		if (Objects.isNull(atribute)) {
 			throw new APIServiceException(attributeName, APIServiceErrorCodes.GENERAL_ATTRIBUTE_REQUIRED_EXCEPTION);

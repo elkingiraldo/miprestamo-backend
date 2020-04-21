@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -60,20 +61,42 @@ public class ClientController {
 	 * service application layer for creating a new client.
 	 * 
 	 * @param client, client provided in order to create.
-	 * @param locale, language the client wants to use
+	 * @param locale, language the client wants to use.
 	 * @return {@link ClientDTO}, client saved in DB.
 	 * @throws APIServiceException when something was wrong during the process
 	 */
 	@PostMapping
-	public ResponseEntity<ClientDTO> post(@RequestBody final ClientDTO client,
+	public ResponseEntity<ClientDTO> create(@RequestBody final ClientDTO client,
 			@RequestHeader(value = "locale", required = false) final String locale) throws APIServiceException {
 
 		final String requestId = UUID.randomUUID().toString();
-		LOGGER.info("[ClientController][post][" + requestId + "] Started.");
+		LOGGER.info("[ClientController][create][" + requestId + "] Started.");
 
 		final ClientDTO newClient = clientService.create(client, requestId);
 
-		LOGGER.info("[ClientController][post][" + requestId + "] finished.");
+		LOGGER.info("[ClientController][create][" + requestId + "] finished.");
+		return new ResponseEntity<ClientDTO>(newClient, HttpStatus.CREATED);
+	}
+
+	/**
+	 * This method takes PUT API request for handling and passing it to correct
+	 * service application layer for updating a client.
+	 * 
+	 * @param client, client provided in order to update.
+	 * @param locale, language the client wants to use.
+	 * @return {@link ClientDTO}, client saved in DB.
+	 * @throws APIServiceException when something was wrong during the process
+	 */
+	@PutMapping
+	public ResponseEntity<ClientDTO> update(@RequestBody final ClientDTO client,
+			@RequestHeader(value = "locale", required = false) final String locale) throws APIServiceException {
+
+		final String requestId = UUID.randomUUID().toString();
+		LOGGER.info("[ClientController][update][" + requestId + "] Started.");
+
+		final ClientDTO newClient = clientService.update(client, requestId);
+
+		LOGGER.info("[ClientController][update][" + requestId + "] finished.");
 		return new ResponseEntity<ClientDTO>(newClient, HttpStatus.CREATED);
 	}
 

@@ -36,10 +36,20 @@ public interface IClientService {
 	 * This method will call all classes and methods required to create a new client
 	 * 
 	 * @param client,    client provided to create.
-	 * @param requestId, unique ID for tracking request
+	 * @param requestId, unique UUID for tracking request
 	 * @return {@link ClientDTO}, client stored in DB
 	 * @throws APIServiceException when a validation fails
 	 */
 	public ClientDTO create(ClientDTO client, String requestId) throws APIServiceException;
+
+	/**
+	 * This method will call all classes and methods required to update a client
+	 * 
+	 * @param client,    client provided to update
+	 * @param requestId, unique UUID for tracking request
+	 * @return {@link ClientDTO}, client stored in DB
+	 * @throws APIServiceException when a validation fails
+	 */
+	public ClientDTO update(ClientDTO client, String requestId) throws APIServiceException;
 
 }

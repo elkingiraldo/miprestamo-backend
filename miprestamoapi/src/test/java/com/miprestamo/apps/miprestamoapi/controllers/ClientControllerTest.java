@@ -85,14 +85,14 @@ public class ClientControllerTest {
 
 	@Test
 	public void onlyOneCallToClientServicePost() throws APIServiceException {
-		clientController.post(client01, Locale.ENGLISH.toString());
+		clientController.create(client01, Locale.ENGLISH.toString());
 		verify(clientService, times(1)).create(any(), anyString());
 	}
 
 	@Test
 	public void dtoNotAffectedInCreateMethod() throws APIServiceException {
 		when(clientService.create(any(), anyString())).thenReturn(client02);
-		final ResponseEntity<ClientDTO> response = clientController.post(client02, Locale.ENGLISH.toString());
+		final ResponseEntity<ClientDTO> response = clientController.create(client02, Locale.ENGLISH.toString());
 		assertEquals(client02, response.getBody());
 	}
 
