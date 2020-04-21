@@ -27,19 +27,19 @@ INSERT INTO identification_document (id, type, prefix) VALUES ('TD-002', 'CEDULA
 INSERT INTO identification_document (id, type, prefix) VALUES ('TD-003', 'PASAPORTE', 'PP');
 INSERT INTO identification_document (id, type, prefix) VALUES ('TD-004', 'NIT', 'NIT');
 
-INSERT INTO client (id, first_name, second_name, first_last_name, second_last_name, business_name, address, phone)
-VALUES (1, 'Elkin', 'Giovanni', 'Giraldo', 'Pinedo', 'egiraldo', 'Calle 160 # 72 - 51', '3152636667');
-INSERT INTO client (id, first_name, second_name, first_last_name, second_last_name, business_name, address, phone)
-VALUES (2, 'Martha', 'Jeannet', 'Pinedo', 'Chaves', 'mpinedoc', 'Calle 160 # 72 - 51', '3158762689');
-INSERT INTO client (id, first_name, second_name, first_last_name, second_last_name, business_name, address, phone)
-VALUES (3, 'Jairo', '', 'Giraldo', 'Jimenez', 'jgiraldoj', 'Calle 160 # 72 - 51', '3162532151');
+INSERT INTO client (first_name, second_name, first_last_name, second_last_name, business_name, address, phone)
+VALUES ('Elkin', 'Giovanni', 'Giraldo', 'Pinedo', 'egiraldo', 'Calle 160 # 72 - 51', '3152636667');
+INSERT INTO client (first_name, second_name, first_last_name, second_last_name, business_name, address, phone)
+VALUES ('Martha', 'Jeannet', 'Pinedo', 'Chaves', 'mpinedoc', 'Calle 160 # 72 - 51', '3158762689');
+INSERT INTO client (first_name, second_name, first_last_name, second_last_name, business_name, address, phone)
+VALUES ('Jairo', '', 'Giraldo', 'Jimenez', 'jgiraldoj', 'Calle 160 # 72 - 51', '3162532151');
 
-INSERT INTO document_details (id, client_id, identification_document_id, document_number) VALUES (1, 1, 'TD-001', '11111');
-INSERT INTO document_details (id, client_id, identification_document_id, document_number) VALUES (2, 1, 'TD-004', '22222');
-INSERT INTO document_details (id, client_id, identification_document_id, document_number) VALUES (3, 2, 'TD-001', '33333');
-INSERT INTO document_details (id, client_id, identification_document_id, document_number) VALUES (4, 3, 'TD-001', '44444');
-INSERT INTO document_details (id, client_id, identification_document_id, document_number) VALUES (5, 3, 'TD-002', '55555');
-INSERT INTO document_details (id, client_id, identification_document_id, document_number) VALUES (6, 3, 'TD-003', '66666');
+INSERT INTO document_details (client_id, identification_document_id, document_number) VALUES (1, 'TD-001', '11111');
+INSERT INTO document_details (client_id, identification_document_id, document_number) VALUES (1, 'TD-004', '22222');
+INSERT INTO document_details (client_id, identification_document_id, document_number) VALUES (2, 'TD-001', '33333');
+INSERT INTO document_details (client_id, identification_document_id, document_number) VALUES (3, 'TD-001', '44444');
+INSERT INTO document_details (client_id, identification_document_id, document_number) VALUES (3, 'TD-002', '55555');
+INSERT INTO document_details (client_id, identification_document_id, document_number) VALUES (3, 'TD-003', '66666');
 
 
 

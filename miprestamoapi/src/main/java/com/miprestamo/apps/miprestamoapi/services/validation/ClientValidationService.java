@@ -1,6 +1,7 @@
 package com.miprestamo.apps.miprestamoapi.services.validation;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import org.slf4j.Logger;
@@ -86,6 +87,30 @@ public class ClientValidationService extends GeneralValidation {
 		if (!isValidId) {
 			throw new APIServiceException(documentDetailDto.getDocumentNumber(),
 					APIServiceErrorCodes.CLIENT_INVALID_IDENTIFICATION_DOCUMENT_ID_EXCEPTION);
+		}
+	}
+
+	/**
+	 * This method auto-complete the information required
+	 * 
+	 * @param client
+	 * @param requestId
+	 */
+	public void autocompleteInfo(final ClientDTO client, final String requestId) {
+		if (Objects.isNull(client.getSecondName())) {
+			client.setSecondName("");
+		}
+		if (Objects.isNull(client.getSecondLastName())) {
+			client.setSecondLastName("");
+		}
+		if (Objects.isNull(client.getBusinessName())) {
+			client.setBusinessName("");
+		}
+		if (Objects.isNull(client.getAddress())) {
+			client.setAddress("");
+		}
+		if (Objects.isNull(client.getPhone())) {
+			client.setPhone("");
 		}
 	}
 

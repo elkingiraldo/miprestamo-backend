@@ -2,7 +2,6 @@ package com.miprestamo.apps.miprestamoapi.entities;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -31,7 +30,7 @@ public class DocumentDetails implements Serializable {
 	@JoinColumn(name = "client_id")
 	private Client client;
 
-	@ManyToOne(cascade = CascadeType.DETACH)
+	@ManyToOne
 	@JoinColumn(name = "identification_document_id")
 	private IdentificationDocument identificationDocumentId;
 

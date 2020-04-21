@@ -33,7 +33,7 @@ public class Client implements Serializable {
 	private String address;
 	private String phone;
 
-	@OneToMany(mappedBy = "client" , cascade = CascadeType.MERGE)
+	@OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
 	private Set<DocumentDetails> documentDetails;
 
 	public Integer getId() {
