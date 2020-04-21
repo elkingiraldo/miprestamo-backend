@@ -22,6 +22,12 @@ CREATE TABLE document_details (
     document_number VARCHAR(20) NOT NULL
 );
 
+CREATE TABLE product (
+	id VARCHAR(50) PRIMARY KEY,
+	name VARCHAR(50) NOT NULL,
+    description VARCHAR(50) NOT NULL
+);
+
 INSERT INTO identification_document (id, type, prefix) VALUES ('TD-001', 'CEDULA DE CIUDADANIA', 'CC');
 INSERT INTO identification_document (id, type, prefix) VALUES ('TD-002', 'CEDULA DE EXTRANGERIA', 'CE');
 INSERT INTO identification_document (id, type, prefix) VALUES ('TD-003', 'PASAPORTE', 'PP');
@@ -41,5 +47,9 @@ INSERT INTO document_details (client_id, identification_document_id, document_nu
 INSERT INTO document_details (client_id, identification_document_id, document_number) VALUES (3, 'TD-002', '55555');
 INSERT INTO document_details (client_id, identification_document_id, document_number) VALUES (3, 'TD-003', '66666');
 
-
+INSERT INTO product (id, name, description) VALUES ('PR-001', 'Tarjeta de crédito VISA', 'Alguna descripción');
+INSERT INTO product (id, name, description) VALUES ('PR-002', 'Tarjeta de crédito MASTERD CARD', 'Alguna descripción');
+INSERT INTO product (id, name, description) VALUES ('PR-003', 'Crédito libre inversión', 'Alguna descripción');
+INSERT INTO product (id, name, description) VALUES ('PR-004', 'Crédito Educativo', 'Alguna descripción');
+INSERT INTO product (id, name, description) VALUES ('PR-005', 'Crédito de libranza', 'Alguna descripción');
 

@@ -14,7 +14,7 @@ import com.miprestamo.apps.miprestamoapi.dtos.IdentificationDocumentDTO;
 import com.miprestamo.apps.miprestamoapi.services.IDServiceImpl;
 
 /**
- * Rest controller for getting current IDs that Mi Prestamo has set
+ * Rest controller for getting current IDs that Mi Prestamo has available
  * 
  * @author egiraldo
  *
