@@ -41,7 +41,6 @@ public class ClientController {
 	 * 
 	 * @param locale, language the client wants to use
 	 * @return {@link List<ClientDTO>}, a list with all clients found
-	 * @throws APIServiceException
 	 */
 	@GetMapping
 	public ResponseEntity<List<ClientDTO>> getAllClients(

@@ -28,6 +28,23 @@ CREATE TABLE product (
     description VARCHAR(50) NOT NULL
 );
 
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
+CREATE TABLE commitment (
+	id uuid DEFAULT uuid_generate_v4 () PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    description VARCHAR(200) NOT NULL,
+    initial_debt BIGINT NOT NULL,
+    current_debt BIGINT NOT NULL,
+    period_debt BIGINT NOT NULL,
+    periods INTEGER NOT NULL,
+    current_period INT NOT NULL,
+    disabled BOOLEAN NOT NULL,
+    status VARCHAR(20) NOT NULL,
+    product_id VARCHAR(50) NOT NULL,
+    client_id INTEGER NOT NULL
+);
+
 INSERT INTO identification_document (id, type, prefix) VALUES ('TD-001', 'CEDULA DE CIUDADANIA', 'CC');
 INSERT INTO identification_document (id, type, prefix) VALUES ('TD-002', 'CEDULA DE EXTRANGERIA', 'CE');
 INSERT INTO identification_document (id, type, prefix) VALUES ('TD-003', 'PASAPORTE', 'PP');
@@ -52,4 +69,16 @@ INSERT INTO product (id, name, description) VALUES ('PR-002', 'Tarjeta de crédi
 INSERT INTO product (id, name, description) VALUES ('PR-003', 'Crédito libre inversión', 'Alguna descripción');
 INSERT INTO product (id, name, description) VALUES ('PR-004', 'Crédito Educativo', 'Alguna descripción');
 INSERT INTO product (id, name, description) VALUES ('PR-005', 'Crédito de libranza', 'Alguna descripción');
+
+INSERT INTO commitment (name, description, initial_debt, current_debt, period_debt, periods, current_period, disabled, status, product_id, client_id)
+VALUES ('Pago carro', 'ayuda para la casa', 12000000, 9000000, 1000000, 12, 4, FALSE, 'PENDING', 'PR-005', 1);
+
+
+
+
+
+
+
+
+
 

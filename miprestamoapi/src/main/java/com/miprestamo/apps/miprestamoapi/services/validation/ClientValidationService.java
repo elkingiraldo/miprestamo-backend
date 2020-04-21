@@ -18,7 +18,7 @@ import com.miprestamo.apps.miprestamoapi.repositories.ClientRepository;
 import com.miprestamo.apps.miprestamoapi.services.IDServiceImpl;
 
 /**
- * This class will handle all validations that client need
+ * This class will handle all validations that client needs
  * 
  * @author egiraldo
  *
@@ -94,11 +94,21 @@ public class ClientValidationService extends GeneralValidation {
 		LOGGER.info("[ClientValidationService][validateUpdate][" + requestId + "] Started.");
 		final Integer clientIdToUpdate = client.getId();
 		validateAttributeNotNull(clientIdToUpdate, ID);
-		if (!clientRepository.existsById(clientIdToUpdate)) {
+		if (!validateIfClientExists(clientIdToUpdate)) {
 			throw new APIServiceException(clientIdToUpdate.toString(), APIServiceErrorCodes.CLIENT_NOT_FOUND_EXCEPTION);
 		}
 		validateCreation(client, requestId);
 		LOGGER.info("[ClientValidationService][validateUpdate][" + requestId + "] Finished.");
+	}
+
+	/**
+	 * This method will validate if client exists or not in DB
+	 * 
+	 * @param clientId
+	 * @return a boolean with the result of operation
+	 */
+	public boolean validateIfClientExists(final Integer clientId) {
+		return clientRepository.existsById(clientId);
 	}
 
 	/**
