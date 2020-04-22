@@ -26,6 +26,8 @@ import com.miprestamo.apps.miprestamoapi.services.IDServiceImpl;
 @Service
 public class ClientValidationService extends GeneralValidation {
 
+	private static final String EMPTY_STRING = "";
+
 	private static final String ID = "id";
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ClientValidationService.class);
@@ -44,8 +46,8 @@ public class ClientValidationService extends GeneralValidation {
 	/**
 	 * This method verifies all the constraints for creating a new client
 	 * 
-	 * @param requestId, UUID for tracking request.
 	 * @param client,    is the DTO sent for the client.
+	 * @param requestId, UUID for tracking request.
 	 * @throws APIServiceException when any validation fails
 	 */
 	public void validateCreation(final ClientDTO client, final String requestId) throws APIServiceException {
@@ -60,26 +62,26 @@ public class ClientValidationService extends GeneralValidation {
 	}
 
 	/**
-	 * This method auto-complete the information required
+	 * This method auto-complete the information required.
 	 * 
-	 * @param client
-	 * @param requestId
+	 * @param client,    provided to auto-complete it
+	 * @param requestId, unique UUID for tracking request.
 	 */
 	public void autocompleteInfo(final ClientDTO client, final String requestId) {
 		if (Objects.isNull(client.getSecondName())) {
-			client.setSecondName("");
+			client.setSecondName(EMPTY_STRING);
 		}
 		if (Objects.isNull(client.getSecondLastName())) {
-			client.setSecondLastName("");
+			client.setSecondLastName(EMPTY_STRING);
 		}
 		if (Objects.isNull(client.getBusinessName())) {
-			client.setBusinessName("");
+			client.setBusinessName(EMPTY_STRING);
 		}
 		if (Objects.isNull(client.getAddress())) {
-			client.setAddress("");
+			client.setAddress(EMPTY_STRING);
 		}
 		if (Objects.isNull(client.getPhone())) {
-			client.setPhone("");
+			client.setPhone(EMPTY_STRING);
 		}
 	}
 

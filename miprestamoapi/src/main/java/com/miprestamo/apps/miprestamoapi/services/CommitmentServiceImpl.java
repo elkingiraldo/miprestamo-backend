@@ -30,7 +30,7 @@ public class CommitmentServiceImpl implements ICommitmentService {
 	@Autowired
 	private CommitmentConverterService commitmentConverterService;
 	@Autowired
-	private CommitmentValidationService commitmentsValidationService;
+	private CommitmentValidationService commitmentValidationService;
 
 	@Override
 	public List<CommitmentDTO> retrieveCommitmentsByProductAndClient(final String productId, final Integer clientId,
@@ -38,7 +38,7 @@ public class CommitmentServiceImpl implements ICommitmentService {
 
 		LOGGER.info("[CommitmentServiceImpl][retrieveCommitmentsByProductAndClient][" + requestId + "] Started.");
 
-		commitmentsValidationService.validateClientAndProduct(clientId, productId, requestId);
+		commitmentValidationService.validateClientAndProduct(clientId, productId, requestId);
 
 		final List<Commitment> listOfCommitments = commitmentRepository.findByClientIdAndProductId(clientId, productId);
 		final List<CommitmentDTO> dtos = commitmentConverterService.toDtos(listOfCommitments, requestId);
@@ -46,6 +46,23 @@ public class CommitmentServiceImpl implements ICommitmentService {
 		LOGGER.info("[CommitmentServiceImpl][retrieveCommitmentsByProductAndClient][" + requestId + "] Finished.");
 
 		return dtos;
+	}
+
+	@Override
+	public CommitmentDTO create(final CommitmentDTO commitment, final String requestId) throws APIServiceException {
+		LOGGER.info("[CommitmentServiceImpl][create][" + requestId + "] Started.");
+
+		commitmentValidationService.validateCreation(commitment, requestId);
+		commitmentValidationService.autocompleteInfo(commitment, requestId);
+
+		final Commitment newCommitment = commitmentRepository
+				.save(commitmentConverterService.toEntity(commitment, requestId));
+		final CommitmentDTO dto = commitmentConverterService.toDTO(newCommitment);
+
+		LOGGER.info("[CommitmentServiceImpl][create][" + requestId + "] Finished. New commitment created with ID: "
+				+ newCommitment.getId() + " for client ID: " + newCommitment.getClientId() + " into the product ID: "
+				+ newCommitment.getProductId());
+		return dto;
 	}
 
 }

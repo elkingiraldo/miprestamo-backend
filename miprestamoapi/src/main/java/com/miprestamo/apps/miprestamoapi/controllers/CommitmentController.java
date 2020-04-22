@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -44,9 +46,9 @@ public class CommitmentController {
 	 * @return {@link List<CommitmentDTO>}, a list with all commitments found.
 	 * @throws APIServiceException
 	 */
-	@GetMapping("/{productId}/{clientId}")
-	public ResponseEntity<List<CommitmentDTO>> getCommitmentsByProductAndClient(@PathVariable final String productId,
-			@PathVariable final Integer clientId,
+	@GetMapping("/{clientId}/{productId}")
+	public ResponseEntity<List<CommitmentDTO>> getCommitmentsByProductAndClient(@PathVariable final Integer clientId,
+			@PathVariable final String productId,
 			@RequestHeader(value = "locale", required = false) final String locale) throws APIServiceException {
 
 		final String requestId = UUID.randomUUID().toString();
@@ -57,6 +59,29 @@ public class CommitmentController {
 
 		LOGGER.info("[CommitmentController][getCommitmentsByProductAndClient][" + requestId + "] Finished.");
 		return new ResponseEntity<List<CommitmentDTO>>(listOfCommitments, HttpStatus.OK);
+	}
+
+	/**
+	 * This method takes POST API request for handling and passing it to correct
+	 * service application layer for creating a new commitment for a client in a
+	 * specific product.
+	 * 
+	 * @param commitment, commitment provided in order to create.
+	 * @param locale      , language the client wants to use.
+	 * @return {@link CommitmentDTO}, commitment saved in DB.
+	 * @throws APIServiceException if something was wrong during the process
+	 */
+	@PostMapping
+	public ResponseEntity<CommitmentDTO> create(@RequestBody final CommitmentDTO commitment,
+			@RequestHeader(value = "locale", required = false) final String locale) throws APIServiceException {
+
+		final String requestId = UUID.randomUUID().toString();
+		LOGGER.info("[CommitmentController][create][" + requestId + "] Started.");
+
+		final CommitmentDTO newCommitment = commitmentService.create(commitment, requestId);
+
+		LOGGER.info("[CommitmentController][create][" + requestId + "] finished.");
+		return new ResponseEntity<CommitmentDTO>(newCommitment, HttpStatus.CREATED);
 	}
 
 }

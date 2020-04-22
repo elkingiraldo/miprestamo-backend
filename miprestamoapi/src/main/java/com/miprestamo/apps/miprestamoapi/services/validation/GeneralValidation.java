@@ -37,21 +37,11 @@ public class GeneralValidation {
 	/**
 	 * Validate if an attribute is null or not
 	 * 
-	 * @param atribute,      String to validate
+	 * @param atribute,      Object to validate if it's null
 	 * @param attributeName, String with the name of the attribute
 	 * @throws APIServiceException
 	 */
-	protected void validateAttributeNotNull(final String atribute, final String attributeName)
-			throws APIServiceException {
-		if (Objects.isNull(atribute)) {
-			throw new APIServiceException(attributeName, APIServiceErrorCodes.GENERAL_ATTRIBUTE_REQUIRED_EXCEPTION);
-		}
-	}
-
-	/**
-	 * Validate if an attribute is null or not
-	 */
-	protected void validateAttributeNotNull(final Integer atribute, final String attributeName)
+	protected void validateAttributeNotNull(final Object atribute, final String attributeName)
 			throws APIServiceException {
 		if (Objects.isNull(atribute)) {
 			throw new APIServiceException(attributeName, APIServiceErrorCodes.GENERAL_ATTRIBUTE_REQUIRED_EXCEPTION);

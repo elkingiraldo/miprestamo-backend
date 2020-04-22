@@ -45,6 +45,11 @@ CREATE TABLE commitment (
     client_id INTEGER NOT NULL
 );
 
+CREATE TABLE bank (
+	id VARCHAR(50) PRIMARY KEY,
+	name VARCHAR(50) NOT NULL
+);
+
 INSERT INTO identification_document (id, type, prefix) VALUES ('TD-001', 'CEDULA DE CIUDADANIA', 'CC');
 INSERT INTO identification_document (id, type, prefix) VALUES ('TD-002', 'CEDULA DE EXTRANGERIA', 'CE');
 INSERT INTO identification_document (id, type, prefix) VALUES ('TD-003', 'PASAPORTE', 'PP');
@@ -73,7 +78,9 @@ INSERT INTO product (id, name, description) VALUES ('PR-005', 'Crédito de libra
 INSERT INTO commitment (name, description, initial_debt, current_debt, period_debt, periods, current_period, disabled, status, product_id, client_id)
 VALUES ('Pago carro', 'ayuda para la casa', 12000000, 9000000, 1000000, 12, 4, FALSE, 'PENDING', 'PR-005', 1);
 
-
+INSERT INTO bank (id, name) VALUES ('RC-001', 'Banco1');
+INSERT INTO bank (id, name) VALUES ('RC-002', 'Recaudadora1');
+INSERT INTO bank (id, name) VALUES ('RC-003', 'Pasarela1');
 
 
 

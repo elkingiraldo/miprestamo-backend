@@ -13,7 +13,11 @@ public enum APIServiceErrorCodes implements IAPIServiceErrorMsg {
 	CLIENT_INVALID_IDENTIFICATION_DOCUMENT_ID_EXCEPTION("api.client.invalid.identification.document.id.exception",
 			HttpStatus.BAD_REQUEST),
 
-	PRODUCT_NOT_FOUND_EXCEPTION("api.product.not.found.exception", HttpStatus.BAD_REQUEST);
+	PRODUCT_NOT_FOUND_EXCEPTION("api.product.not.found.exception", HttpStatus.BAD_REQUEST),
+
+	COMMITMENT_MINIMUM_NUMBER_OF_PERIODS_EXCEPTION("api.commitments.minimum.number.of.periods.exception",
+			HttpStatus.BAD_REQUEST),
+	COMMITMENT_MINIMUM_INITIAL_DEBT_EXCEPTION("api.commitments.minimum.initial.debt.exception", HttpStatus.BAD_REQUEST);
 
 	private String message;
 	private HttpStatus httpStatus;

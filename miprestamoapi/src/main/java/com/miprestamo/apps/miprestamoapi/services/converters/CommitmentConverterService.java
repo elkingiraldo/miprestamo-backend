@@ -28,7 +28,7 @@ public class CommitmentConverterService {
 	 * 
 	 * @param entities
 	 * @param requestId
-	 * @return {@link List<ClientDTO>}
+	 * @return {@link List<CommitmentDTO>}
 	 */
 	public List<CommitmentDTO> toDtos(final List<Commitment> entities, final String requestId) {
 		LOGGER.info("[CommitmentsConverterService][toDtos][" + requestId + "] Started. Number of entities found: "
@@ -41,6 +41,32 @@ public class CommitmentConverterService {
 		}
 		LOGGER.info("[CommitmentsConverterService][toDtos][" + requestId + "] finished.");
 		return dtoList;
+	}
+
+	/**
+	 * This method transforms {@link Commitment} to {@link CommitmentDTO}
+	 * 
+	 * @param entity, Commitment entity
+	 * @return {@link CommitmentDTO}
+	 */
+	public CommitmentDTO toDTO(final Commitment entity) {
+		final ModelMapper modelMapper = new ModelMapper();
+		return modelMapper.map(entity, CommitmentDTO.class);
+	}
+
+	/**
+	 * This method transforms {@link CommitmentDTO} to {@link Commitment}
+	 * 
+	 * @param dto,       Commitment DTO
+	 * @param requestId, unique UUID for tracking request
+	 * @return {@link Commitment}
+	 */
+	public Commitment toEntity(final CommitmentDTO dto, final String requestId) {
+		LOGGER.info("[CommitmentConverterService][toEntity][" + requestId + "] Started.");
+		final ModelMapper modelMapper = new ModelMapper();
+		final Commitment entity = modelMapper.map(dto, Commitment.class);
+		LOGGER.info("[CommitmentConverterService][toEntity][" + requestId + "] Finished.");
+		return entity;
 	}
 
 }
