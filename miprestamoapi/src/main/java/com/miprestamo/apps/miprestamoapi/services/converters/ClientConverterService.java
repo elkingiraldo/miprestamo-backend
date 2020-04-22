@@ -22,19 +22,40 @@ public class ClientConverterService {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ClientConverterService.class);
 
+	/**
+	 * This method transforms {@link Client} to {@link ClientDTO}
+	 * 
+	 * @param entity, client entity
+	 * @return {@link ClientDTO}
+	 */
 	public ClientDTO toDTO(final Client entity) {
 		final ModelMapper modelMapper = new ModelMapper();
 		return modelMapper.map(entity, ClientDTO.class);
 	}
 
-	public Client toEntity(final ClientDTO dto, String requestId) {
+	/**
+	 * This method transforms {@link ClientDTO} to {@link Client}
+	 * 
+	 * @param dto,      client DTO
+	 * @param requestId
+	 * @return {@link Client}
+	 */
+	public Client toEntity(final ClientDTO dto, final String requestId) {
 		LOGGER.info("[ClientConverterService][toEntity][" + requestId + "] Started.");
 		final ModelMapper modelMapper = new ModelMapper();
-		Client entity = modelMapper.map(dto, Client.class);
+		final Client entity = modelMapper.map(dto, Client.class);
+		entity.getDocumentDetails().forEach(id -> id.setClient(entity));
 		LOGGER.info("[ClientConverterService][toEntity][" + requestId + "] Finished.");
 		return entity;
 	}
 
+	/**
+	 * This method transforms {@link List<Client>} to {@link List<ClientDTO>}
+	 * 
+	 * @param entities
+	 * @param requestId
+	 * @return {@link List<ClientDTO>}
+	 */
 	public List<ClientDTO> toDtos(final List<Client> entities, final String requestId) {
 		LOGGER.info("[ClientConverterService][toDtos][" + requestId + "] Started.");
 		final List<ClientDTO> dtoList = new ArrayList<ClientDTO>();

@@ -1,6 +1,7 @@
 package com.miprestamo.apps.miprestamoapi.services.validation;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import org.slf4j.Logger;
@@ -13,10 +14,11 @@ import com.miprestamo.apps.miprestamoapi.dtos.DocumentDetailsDTO;
 import com.miprestamo.apps.miprestamoapi.dtos.IdentificationDocumentDTO;
 import com.miprestamo.apps.miprestamoapi.exception.APIServiceErrorCodes;
 import com.miprestamo.apps.miprestamoapi.exception.APIServiceException;
+import com.miprestamo.apps.miprestamoapi.repositories.ClientRepository;
 import com.miprestamo.apps.miprestamoapi.services.IDServiceImpl;
 
 /**
- * This class will handle all validations that client need
+ * This class will handle all validations that client needs
  * 
  * @author egiraldo
  *
@@ -24,10 +26,14 @@ import com.miprestamo.apps.miprestamoapi.services.IDServiceImpl;
 @Service
 public class ClientValidationService extends GeneralValidation {
 
+	private static final String ID = "id";
+
 	private static final Logger LOGGER = LoggerFactory.getLogger(ClientValidationService.class);
 
 	@Autowired
 	private IDServiceImpl idService;
+	@Autowired
+	private ClientRepository clientRepository;
 
 	private static final String FIRST_NAME = "firstName";
 	private static final String FIRST_LAST_NAME = "firstLastName";
@@ -36,11 +42,10 @@ public class ClientValidationService extends GeneralValidation {
 	private static final String DOCUMENT_NUMBER = "documentNumber";
 
 	/**
-	 * This method verifies all the constraints for create a new client
+	 * This method verifies all the constraints for creating a new client
 	 * 
-	 * @param requestId,UUID for tracking request
-	 * 
-	 * @param client,        is the DTO sent for the client
+	 * @param requestId, UUID for tracking request.
+	 * @param client,    is the DTO sent for the client.
 	 * @throws APIServiceException when any validation fails
 	 */
 	public void validateCreation(final ClientDTO client, final String requestId) throws APIServiceException {
@@ -52,6 +57,58 @@ public class ClientValidationService extends GeneralValidation {
 		validateSizeOfSet(client.getDocumentDetails(), DOCUMENT_DETAILS);
 		validateDocumentDetails(client.getDocumentDetails());
 		LOGGER.info("[ClientValidationService][validateCreation][" + requestId + "] finished.");
+	}
+
+	/**
+	 * This method auto-complete the information required
+	 * 
+	 * @param client
+	 * @param requestId
+	 */
+	public void autocompleteInfo(final ClientDTO client, final String requestId) {
+		if (Objects.isNull(client.getSecondName())) {
+			client.setSecondName("");
+		}
+		if (Objects.isNull(client.getSecondLastName())) {
+			client.setSecondLastName("");
+		}
+		if (Objects.isNull(client.getBusinessName())) {
+			client.setBusinessName("");
+		}
+		if (Objects.isNull(client.getAddress())) {
+			client.setAddress("");
+		}
+		if (Objects.isNull(client.getPhone())) {
+			client.setPhone("");
+		}
+	}
+
+	/**
+	 * This method verifies all the constraints for updating a new client
+	 * 
+	 * @param client,    UUID for tracking request
+	 * @param requestId, UUID for tracking request
+	 * @throws APIServiceException when any validation fails
+	 */
+	public void validateUpdate(final ClientDTO client, final String requestId) throws APIServiceException {
+		LOGGER.info("[ClientValidationService][validateUpdate][" + requestId + "] Started.");
+		final Integer clientIdToUpdate = client.getId();
+		validateAttributeNotNull(clientIdToUpdate, ID);
+		if (!validateIfClientExists(clientIdToUpdate)) {
+			throw new APIServiceException(clientIdToUpdate.toString(), APIServiceErrorCodes.CLIENT_NOT_FOUND_EXCEPTION);
+		}
+		validateCreation(client, requestId);
+		LOGGER.info("[ClientValidationService][validateUpdate][" + requestId + "] Finished.");
+	}
+
+	/**
+	 * This method will validate if client exists or not in DB
+	 * 
+	 * @param clientId
+	 * @return a boolean with the result of operation
+	 */
+	public boolean validateIfClientExists(final Integer clientId) {
+		return clientRepository.existsById(clientId);
 	}
 
 	/**

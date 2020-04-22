@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 
+import javax.transaction.Transactional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,8 +42,10 @@ public class ClientServiceImpl implements IClientService {
 	@Override
 	public List<ClientDTO> getAllClients(final String requestId) {
 		LOGGER.info("[ClientServiceImpl][getAllClients][" + requestId + "] Started.");
+
 		final List<Client> clientList = clientRepository.findAll();
 		final List<ClientDTO> dtos = clientConverterService.toDtos(clientList, requestId);
+
 		LOGGER.info("[ClientServiceImpl][getAllClients][" + requestId + "] Finished.");
 		return dtos;
 	}
@@ -56,13 +60,33 @@ public class ClientServiceImpl implements IClientService {
 	}
 
 	@Override
+	@Transactional
 	public ClientDTO create(final ClientDTO client, final String requestId) throws APIServiceException {
 		LOGGER.info("[ClientServiceImpl][create][" + requestId + "] Started.");
+
 		clientValidationService.validateCreation(client, requestId);
+		clientValidationService.autocompleteInfo(client, requestId);
+
 		final Client newClientEntity = clientRepository.save(clientConverterService.toEntity(client, requestId));
+
 		final ClientDTO newClientDto = clientConverterService.toDTO(newClientEntity);
-		LOGGER.info("[ClientServiceImpl][create][" + requestId + "] Finished. New client creater with ID: "
+		LOGGER.info("[ClientServiceImpl][create][" + requestId + "] Finished. New client created with ID: "
 				+ newClientEntity.getId());
+		return newClientDto;
+	}
+
+	@Override
+	@Transactional
+	public ClientDTO update(final ClientDTO client, final String requestId) throws APIServiceException {
+		LOGGER.info("[ClientServiceImpl][update][" + requestId + "] Started.");
+
+		clientValidationService.validateUpdate(client, requestId);
+
+		final Client updatedClientEntity = clientRepository.save(clientConverterService.toEntity(client, requestId));
+
+		final ClientDTO newClientDto = clientConverterService.toDTO(updatedClientEntity);
+		LOGGER.info("[ClientServiceImpl][update][" + requestId + "] Finished. client updated with ID: "
+				+ updatedClientEntity.getId());
 		return newClientDto;
 	}
 
