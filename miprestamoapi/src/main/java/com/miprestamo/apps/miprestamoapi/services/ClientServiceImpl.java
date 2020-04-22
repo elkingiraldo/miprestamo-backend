@@ -68,8 +68,8 @@ public class ClientServiceImpl implements IClientService {
 		clientValidationService.autocompleteInfo(client, requestId);
 
 		final Client newClientEntity = clientRepository.save(clientConverterService.toEntity(client, requestId));
-
 		final ClientDTO newClientDto = clientConverterService.toDTO(newClientEntity);
+
 		LOGGER.info("[ClientServiceImpl][create][" + requestId + "] Finished. New client created with ID: "
 				+ newClientEntity.getId());
 		return newClientDto;

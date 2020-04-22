@@ -28,4 +28,16 @@ public interface ICommitmentService {
 	public List<CommitmentDTO> retrieveCommitmentsByProductAndClient(String productId, Integer clientId,
 			String requestId) throws APIServiceException;
 
+	/**
+	 * This method will call all classes and methods required for validating the
+	 * input DTO and creating a new commitment for a client related to an specific
+	 * product
+	 * 
+	 * @param commitment, commitment provided to create.
+	 * @param requestId,  unique UUID for tracking request
+	 * @return {@link CommitmentDTO}
+	 * @throws APIServiceException if any validation fails
+	 */
+	public CommitmentDTO create(CommitmentDTO commitment, String requestId) throws APIServiceException;
+
 }
